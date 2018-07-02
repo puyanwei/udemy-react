@@ -12,15 +12,14 @@ class App extends Component {
         showPersons: true,
     };
 
-    switchNameHandler = (newName) => {
-        this.setState({
-            characters: [
-                { name: 'Ryu', country: 'Japan' },
-                { name: 'Chun-Li', country: 'China' },
-                { name: newName, country: 'India' },
-            ],
-        });
+    deletePersonHandler = (personIndex) => {
+        // const persons = this.state.characters.slice();
+        const persons = [...this.state.persons];
+        // Copies the state as to not mutate the original. Defining variables will create them as reference types, meaning the copy will still mutate the original. Both methods above creates a copy that doesn't effect the original.
+        persons.splice(personIndex, 1);
+        this.setState({ characters: persons });
     };
+
     nameChangedHandler = (event) => {
         this.setState({
             characters: [
@@ -51,9 +50,13 @@ class App extends Component {
         if (this.state.showPersons) {
             characters = (
                 <div>
-                    {this.state.characters.map((character) => {
+                    {this.state.characters.map((character, index) => {
                         return (
                             <Person
+                                click={this.deletePersonHandler.bind(
+                                    this,
+                                    index
+                                )}
                                 name={character.name}
                                 country={character.country}
                             />
