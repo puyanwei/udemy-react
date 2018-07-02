@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './components/Person';
+import Person from './Person/Person';
 
 class App extends Component {
     state = {
@@ -9,6 +9,7 @@ class App extends Component {
             { name: 'Chun-Li', country: 'China' },
             { name: 'Ken', country: 'USA' },
         ],
+        showPersons: true,
     };
 
     switchNameHandler = (newName) => {
@@ -30,29 +31,47 @@ class App extends Component {
         });
     };
 
+    togglePersonsHandler = () => {
+        const show = this.state.showPersons;
+        this.setState({ showPersons: !show });
+    };
+
     render() {
+        const style = {
+            backgroundColor: 'white',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px',
+            marginBottom: '10px',
+            cursor: 'pointer',
+        };
+
         return (
             <div className="App">
                 <h1>Street Fighter</h1>
-                <button onClick={this.switchNameHandler.bind(this, 'E.Honda')}>
-                    Switch Name
+                <button style={style} onClick={this.togglePersonsHandler}>
+                    View Characters
                 </button>
-                <Person
-                    name={this.state.characters[0].name}
-                    country={this.state.characters[0].country}
-                />
-                <Person
-                    name={this.state.characters[1].name}
-                    country={this.state.characters[1].country}
-                >
-                    Move: Spinning Bird Kick
-                </Person>
-                <Person
-                    name={this.state.characters[2].name}
-                    country={this.state.characters[2].country}
-                    click={this.switchNameHandler.bind(this, 'Guile')}
-                    changed={this.nameChangedHandler}
-                />
+                {this.state.showPersons ? (
+                    <div>
+                        <Person
+                            name={this.state.characters[0].name}
+                            country={this.state.characters[0].country}
+                        />
+                        <Person
+                            name={this.state.characters[1].name}
+                            country={this.state.characters[1].country}
+                        >
+                            Move: Spinning Bird Kick
+                        </Person>
+                        <Person
+                            name={this.state.characters[2].name}
+                            country={this.state.characters[2].country}
+                            click={this.switchNameHandler.bind(this, 'Guile')}
+                            changed={this.nameChangedHandler}
+                        />
+                    </div>
+                ) : null}
             </div>
         );
     }
