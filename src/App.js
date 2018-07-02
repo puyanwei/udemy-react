@@ -11,6 +11,10 @@ class App extends Component {
         ],
     };
 
+    switchNameHandler = () => {
+        console.log('was called');
+    };
+
     render() {
         return (
             <div className="App">
@@ -29,7 +33,7 @@ class App extends Component {
                     name={this.state.characters[2].name}
                     country={this.state.characters[2].country}
                 />
-                <button>Switch Name</button>
+                <button onClick={this.switchNameHandler}>Switch Name</button>
             </div>
         );
     }
