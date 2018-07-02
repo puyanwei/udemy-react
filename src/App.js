@@ -12,7 +12,13 @@ class App extends Component {
     };
 
     switchNameHandler = () => {
-        console.log('was called');
+        this.setState({
+            characters: [
+                { name: 'Ryu', country: 'Japan' },
+                { name: 'Chun-Li', country: 'China' },
+                { name: 'Dhalsim', country: 'India' },
+            ],
+        });
     };
 
     render() {
