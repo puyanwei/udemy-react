@@ -46,32 +46,38 @@ class App extends Component {
             cursor: 'pointer',
         };
 
+        let characters = null;
+
+        if (this.state.showPersons) {
+            characters = (
+                <div>
+                    <Person
+                        name={this.state.characters[0].name}
+                        country={this.state.characters[0].country}
+                    />
+                    <Person
+                        name={this.state.characters[1].name}
+                        country={this.state.characters[1].country}
+                    >
+                        Move: Spinning Bird Kick
+                    </Person>
+                    <Person
+                        name={this.state.characters[2].name}
+                        country={this.state.characters[2].country}
+                        click={this.switchNameHandler.bind(this, 'Guile')}
+                        changed={this.nameChangedHandler}
+                    />
+                </div>
+            );
+        }
+
         return (
             <div className="App">
                 <h1>Street Fighter</h1>
                 <button style={style} onClick={this.togglePersonsHandler}>
-                    View Characters
+                    Toggle Views
                 </button>
-                {this.state.showPersons ? (
-                    <div>
-                        <Person
-                            name={this.state.characters[0].name}
-                            country={this.state.characters[0].country}
-                        />
-                        <Person
-                            name={this.state.characters[1].name}
-                            country={this.state.characters[1].country}
-                        >
-                            Move: Spinning Bird Kick
-                        </Person>
-                        <Person
-                            name={this.state.characters[2].name}
-                            country={this.state.characters[2].country}
-                            click={this.switchNameHandler.bind(this, 'Guile')}
-                            changed={this.nameChangedHandler}
-                        />
-                    </div>
-                ) : null}
+                {characters}
             </div>
         );
     }
