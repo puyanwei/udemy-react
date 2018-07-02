@@ -12,22 +12,29 @@ class App extends Component {
         showPersons: true,
     };
 
-    deletePersonHandler = (personIndex) => {
-        // const persons = this.state.characters.slice();
-        const persons = [...this.state.persons];
-        // Copies the state as to not mutate the original. Defining variables will create them as reference types, meaning the copy will still mutate the original. Both methods above creates a copy that doesn't effect the original.
-        persons.splice(personIndex, 1);
-        this.setState({ characters: persons });
+    nameChangedHandler = (event, id) => {
+        const characterIndex = this.state.characters.findIndex((character) => {
+            return character.id === id;
+        });
+        // Array index of chosen text box
+        const chosenCharacter = { ...this.state.characters[characterIndex] };
+
+        chosenCharacter.name = event.target.value;
+        // Renames the name of the chosen character to the textbox value
+
+        const characters = [...this.state.characters];
+        characters[characterIndex] = chosenCharacter;
+        // Updates the new character name to the copied state
+
+        this.setState({ characters: characters });
     };
 
-    nameChangedHandler = (event) => {
-        this.setState({
-            characters: [
-                { name: 'Ryu', country: 'Japan' },
-                { name: 'Chun-Li', country: event.target.value },
-                { name: 'Ken', country: 'USA' },
-            ],
-        });
+    deletePersonHandler = (personIndex) => {
+        // const persons = this.state.characters.slice();
+        const newState = [...this.state.characters];
+        // Copies the state as to not mutate the original. Defining variables will create them as reference types, meaning the copy will still mutate the original. Both methods above creates a copy that doesn't effect the original.
+        newState.splice(personIndex, 1);
+        this.setState({ characters: newState });
     };
 
     togglePersonsHandler = () => {
@@ -53,13 +60,13 @@ class App extends Component {
                     {this.state.characters.map((character, index) => {
                         return (
                             <Person
-                                click={this.deletePersonHandler.bind(
-                                    this,
-                                    index
-                                )}
+                                click={() => this.deletePersonHandler(index)}
                                 name={character.name}
                                 country={character.country}
                                 key={character.id}
+                                changed={(event) =>
+                                    this.nameChangedHandler(event, character.id)
+                                }
                             />
                         );
                     })}
