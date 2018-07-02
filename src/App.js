@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
     state = {
         characters: [
-            { name: 'Ryu', country: 'Japan' },
-            { name: 'Chun-Li', country: 'China' },
-            { name: 'Ken', country: 'USA' },
+            { id: 1, name: 'Ryu', country: 'Japan' },
+            { id: 2, name: 'Chun-Li', country: 'China' },
+            { id: 3, name: 'Ken', country: 'USA' },
         ],
         showPersons: true,
     };
@@ -59,6 +59,7 @@ class App extends Component {
                                 )}
                                 name={character.name}
                                 country={character.country}
+                                key={character.id}
                             />
                         );
                     })}
