@@ -3,13 +3,33 @@ import './App.css';
 import Person from './components/Person';
 
 class App extends Component {
+    state = {
+        characters: [
+            { name: 'Ryu', country: 'Japan' },
+            { name: 'Chun-Li', country: 'China' },
+            { name: 'Ken', country: 'USA' },
+        ],
+    };
+
     render() {
         return (
             <div className="App">
                 <h1>Street Fighter</h1>
-                <Person name="Ryu" country="Japan"/>
-                <Person name="Chun-Li" country="China">Move: Spinning Bird Kick</Person>
-                <Person name="Ken" country="USA"/>
+                <Person
+                    name={this.state.characters[0].name}
+                    country={this.state.characters[0].country}
+                />
+                <Person
+                    name={this.state.characters[1].name}
+                    country={this.state.characters[1].country}
+                >
+                    Move: Spinning Bird Kick
+                </Person>
+                <Person
+                    name={this.state.characters[2].name}
+                    country={this.state.characters[2].country}
+                />
+                <button>Switch Name</button>
             </div>
         );
     }
