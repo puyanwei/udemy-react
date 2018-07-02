@@ -51,22 +51,14 @@ class App extends Component {
         if (this.state.showPersons) {
             characters = (
                 <div>
-                    <Person
-                        name={this.state.characters[0].name}
-                        country={this.state.characters[0].country}
-                    />
-                    <Person
-                        name={this.state.characters[1].name}
-                        country={this.state.characters[1].country}
-                    >
-                        Move: Spinning Bird Kick
-                    </Person>
-                    <Person
-                        name={this.state.characters[2].name}
-                        country={this.state.characters[2].country}
-                        click={this.switchNameHandler.bind(this, 'Guile')}
-                        changed={this.nameChangedHandler}
-                    />
+                    {this.state.characters.map((character) => {
+                        return (
+                            <Person
+                                name={character.name}
+                                country={character.country}
+                            />
+                        );
+                    })}
                 </div>
             );
         }
