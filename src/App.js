@@ -9,7 +9,7 @@ class App extends Component {
             { id: 2, name: 'Chun-Li', country: 'China' },
             { id: 3, name: 'Ken', country: 'USA' },
         ],
-        showPersons: true,
+        showPersons: false,
     };
 
     nameChangedHandler = (event, id) => {
@@ -44,9 +44,10 @@ class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
-            border: '1px solid blue',
+            border: '1px solid black',
             padding: '8px',
             marginBottom: '10px',
             cursor: 'pointer',
@@ -72,6 +73,7 @@ class App extends Component {
                     })}
                 </div>
             );
+            style.backgroundColor = 'red';
         }
 
         return (
