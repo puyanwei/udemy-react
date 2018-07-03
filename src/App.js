@@ -43,17 +43,8 @@ class App extends Component {
     };
 
     render() {
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid black',
-            padding: '8px',
-            marginBottom: '10px',
-            cursor: 'pointer',
-        };
-
         let characters = null;
+        let btnStyles = '';
 
         if (this.state.showPersons) {
             characters = (
@@ -73,7 +64,7 @@ class App extends Component {
                     })}
                 </div>
             );
-            style.backgroundColor = 'red';
+            btnStyles = styles.Red;
         }
 
         const assignedClasses = [];
@@ -88,7 +79,10 @@ class App extends Component {
             <div className={styles.App}>
                 <h1>Street Fighter</h1>
                 <p className={assignedClasses.join(' ')}>Pick Your Character</p>
-                <button style={style} onClick={this.togglePersonsHandler}>
+                <button
+                    className={btnStyles}
+                    onClick={this.togglePersonsHandler}
+                >
                     Toggle Views
                 </button>
                 {characters}
