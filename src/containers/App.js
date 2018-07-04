@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './App.css';
-import Person from './Person/Person';
+import PersonList from '../components/PersonList/PersonList';
 
 class App extends Component {
     state = {
@@ -49,19 +49,11 @@ class App extends Component {
         if (this.state.showPersons) {
             characters = (
                 <div>
-                    {this.state.characters.map((character, index) => {
-                        return (
-                            <Person
-                                click={() => this.deletePersonHandler(index)}
-                                name={character.name}
-                                country={character.country}
-                                key={character.id}
-                                changed={(event) =>
-                                    this.nameChangedHandler(event, character.id)
-                                }
-                            />
-                        );
-                    })}
+                    <PersonList
+                        characters={this.state.characters}
+                        clicked={this.deletePersonHandler}
+                        changed={this.nameChangedHandler}
+                    />
                 </div>
             );
             btnStyles = styles.Red;
