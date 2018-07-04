@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './App.css';
 import PersonList from '../components/PersonList/PersonList';
 import HomepageTop from '../components/HomepageTop/HomepageTop';
 
-class App extends Component {
+class App extends PureComponent {
     state = {
         characters: [
             { id: 1, name: 'Ryu', country: 'Japan' },
@@ -56,6 +56,13 @@ class App extends Component {
 
         return (
             <div className={styles.App}>
+                <button
+                    onClick={() => {
+                        this.setState({ showPersons: true });
+                    }}
+                >
+                    Always Show
+                </button>
                 <HomepageTop
                     showPersons={this.state.showPersons}
                     characters={this.state.characters}

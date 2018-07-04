@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './Person.css';
 
-class Person extends Component {
+class Person extends PureComponent {
     render() {
         return (
             <div className={styles.Person}>
