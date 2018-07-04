@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.css';
 import PersonList from '../components/PersonList/PersonList';
+import HomepageTop from '../components/HomepageTop/HomepageTop';
 
 class App extends Component {
     state = {
@@ -30,9 +31,7 @@ class App extends Component {
     };
 
     deletePersonHandler = (personIndex) => {
-        // const persons = this.state.characters.slice();
         const newState = [...this.state.characters];
-        // Copies the state as to not mutate the original. Defining variables will create them as reference types, meaning the copy will still mutate the original. Both methods above creates a copy that doesn't effect the original.
         newState.splice(personIndex, 1);
         this.setState({ characters: newState });
     };
@@ -44,39 +43,24 @@ class App extends Component {
 
     render() {
         let characters = null;
-        let btnStyles = '';
 
         if (this.state.showPersons) {
             characters = (
-                <div>
-                    <PersonList
-                        characters={this.state.characters}
-                        clicked={this.deletePersonHandler}
-                        changed={this.nameChangedHandler}
-                    />
-                </div>
+                <PersonList
+                    characters={this.state.characters}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangedHandler}
+                />
             );
-            btnStyles = styles.Red;
-        }
-
-        const assignedClasses = [];
-        if (this.state.characters.length <= 2) {
-            assignedClasses.push(styles.red);
-        }
-        if (this.state.characters.length <= 1) {
-            assignedClasses.push(styles.bold);
         }
 
         return (
             <div className={styles.App}>
-                <h1>Street Fighter</h1>
-                <p className={assignedClasses.join(' ')}>Pick Your Character</p>
-                <button
-                    className={btnStyles}
-                    onClick={this.togglePersonsHandler}
-                >
-                    Toggle Views
-                </button>
+                <HomepageTop
+                    showPersons={this.state.showPersons}
+                    characters={this.state.characters}
+                    clicked={this.togglePersonsHandler}
+                />
                 {characters}
             </div>
         );
