@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './HomepageTop.css';
+import Aux from '../../hoc/Aux';
 
 const homepageTop = (props) => {
     const assignedClasses = [];
-    let btnStyles = '';
+    let btnStyles = styles.Button;
     if (props.showPersons) {
-        btnStyles = styles.Red;
+        btnStyles = [styles.Button, styles.Red].join(' ');
     }
     if (props.characters.length <= 2) {
         assignedClasses.push(styles.red);
@@ -15,13 +16,13 @@ const homepageTop = (props) => {
     }
 
     return (
-        <div className={styles.HomepageTop}>
+        <Aux>
             <h1>Street Fighter</h1>
             <p className={assignedClasses.join(' ')}>Pick Your Character</p>
             <button className={btnStyles} onClick={props.clicked}>
                 Toggle Views
             </button>
-        </div>
+        </Aux>
     );
 };
 
